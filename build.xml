@@ -44,6 +44,9 @@
 		<java classname="ClientOnepExamples" fork="true">
 			<classpath refid="onepv1.classpath"/>
 		</java>
+		<java classname="ProvisionExamples" fork="true">
+			<classpath refid="onepv1.classpath"/>
+		</java>
 	</target>
 
 	<target name="test" depends="build-test">

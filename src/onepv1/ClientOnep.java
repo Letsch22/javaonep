@@ -11,6 +11,7 @@
 
 package onepv1;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -209,8 +210,8 @@ public class ClientOnep extends Onep {
 	 * @param entries		The data to be written which is of type Map<String alias,Object data>.	 *
 	 * @return				The Result object.
 	 */
-	public Result write( Map<String,Object> entries) throws OneException{
-		LinkedList<Object> data = new LinkedList<Object>();
+	public Result writegroup( Map<String,Object> entries) throws OneException{
+		Map<String, Object> data = new HashMap<String, Object>();
 		for( String alias:entries.keySet()){
 			String rid = null;
 			try{
@@ -218,12 +219,9 @@ public class ClientOnep extends Onep {
 			}catch(OneException e){
 				continue;
 			}
-			LinkedList<Object> entry = new LinkedList<Object>();
-			entry.add(rid);
-			entry.add(entries.get(alias));
-			data.add(entry);			
+			data.put(rid, entries.get(alias));			
 		}
-		return this.write(cik_, data);
+		return this.writegroup(cik_, data);
 	}	
 	
 }

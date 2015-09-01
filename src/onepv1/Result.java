@@ -12,15 +12,15 @@
 package onepv1;
 
 public class Result {
-	private String status_;
+	private Object status_;
 	private String message_;
 
-	Result(String status, String message) {
+	Result(Object status, String message) {
 		this.status_ = status;
 		this.message_ = message;
 	}
 
-	public String getStatus() {
+	public Object getStatus() {
 		return status_;
 	}
 

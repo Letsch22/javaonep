@@ -12,6 +12,7 @@
 package onepv1;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Onep {
 	private ITransport transport_;
@@ -178,7 +179,7 @@ public class Onep {
 		return callRPC(clientkey, "read", argu);
 	}	
 
-	/** Records a list of historical entries to the resource specified.
+	/** Records a list of historical entries to the resource specified. NOTE: This API is deprecated.
 	 * 
 	 * @param clientkey		The cik of client.
 	 * @param rid		  	Resource ID.
@@ -194,6 +195,23 @@ public class Onep {
 		argu.add(options);
 		return callRPC(clientkey, "record", argu);
 	}	
+	
+	/** Records a list of historical entries to the resource specified at specific timestamps.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param rid			Resource ID.
+	 * @param entries		The array data of format ([Timestamp, Value],...]
+	 * @param options		Options of read data.
+	 * @return				The Result object.
+	 */
+	public Result recordbatch(String clientkey, String rid, Object entries, Object options)
+			throws OneException {
+		LinkedList<Object> argu = new LinkedList<Object>();
+		argu.add(rid);
+		argu.add(entries);
+		argu.add(options);
+		return callRPC(clientkey, "recordbatch", argu);
+	}
 
 	/** Given an Activation Code, the associated entity is revoked after which the Activation Code can no longer be used.
 	 * 
@@ -254,6 +272,51 @@ public class Onep {
 		return callRPC(clientkey, "update", argu);
 	}
 	
+	/** Returns metric usage for client and its subhierarchy.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param rid			Resource ID.
+	 * @param metric		Usage metric to measure ("client", "dataport", etc).
+	 * @param starttime		Unix timestamp to begin measurement.
+	 * @param endtime		Unix timestamp to end measurement.
+	 * @return				The Result object.
+	 */
+	public Result usage(String clientkey, String rid, String metric, int starttime, int endtime)
+			throws OneException {
+		LinkedList<Object> argu = new LinkedList<Object>();
+		argu.add(rid);
+		argu.add(metric);
+		argu.add(starttime);
+		argu.add(endtime);
+		return callRPC(clientkey, "usage", argu);
+	}
+	
+	/** Long polling to wait on dataport to be updated and return the value when updated.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param rid			Resource ID.
+	 * @return				The Result object.
+	 */
+	public Result wait(String clientkey, String rid)
+			throws OneException {
+		return wait(clientkey, rid, EmptyOption.getInstance());
+	}
+	
+	/** Long polling to wait on dataport to be updated and return the value when updated.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param rid			Resource ID.
+	 * @param options		Options of wait.
+	 * @return				The Result object.
+	 */
+	public Result wait(String clientkey, String rid, Object options)
+			throws OneException {
+		LinkedList<Object> argu = new LinkedList<Object>();
+		argu.add(rid);
+		argu.add(options);
+		return callRPC(clientkey, "wait", argu);
+	}
+	
 	/**  Writes a single value to the resource specified.
 	 * 
 	 * @param clientkey		The cik of client.
@@ -282,4 +345,30 @@ public class Onep {
 			throws OneException {
 		return write(clientkey,rid,value,EmptyOption.getInstance());		
 	}	
+	
+	/** Writes multiple values to the resources specified.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param entries		The resource, value pair to be written.
+	 * @return				The Result object.
+	 */
+	public Result writegroup(String clientkey, Map<String, Object> entries)
+			throws OneException {
+		return writegroup(clientkey, entries, EmptyOption.getInstance());
+	}
+	
+	/** Writes multiple values to the resources specified.
+	 * 
+	 * @param clientkey		The cik of the client.
+	 * @param entries		The resource, value pair to be written.
+	 * @param options		Options of write data.
+	 * @return				The Result object.
+	 */
+	public Result writegroup(String clientkey, Map<String, Object> entries, Object options)
+			throws OneException {
+		LinkedList<Object> argu = new LinkedList<Object>();
+		argu.add(entries);
+		argu.add(options);
+		return callRPC(clientkey, "writegroup", argu);
+	}
 }

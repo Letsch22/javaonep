@@ -3,7 +3,7 @@
 This project is a Java binding to the Exosite One Platform API. The API is
 exposed over HTTP in a JSON RPC style interface.
 
-Recommend using with JDK/JRE 1.6. This project was tested with Eclipse 3.5.2/JDK 1.6.0 (Linux).
+Recommend using with JDK/JRE 1.8. This project was tested with Eclipse 4.5.0/JDK 1.8.60 (Mac OS X).
 
 License is BSD, Copyright 2011, Exosite LLC (see LICENSE file)
 
@@ -96,13 +96,18 @@ To use in your application, add the following jar files to your library director
 - `./libs/json_simple-1.1.jar`
 
 For more information on the API and examples, reference the API
-documentation at http://github.com/exosite/api
+documentation at http://docs.exosite.com/
 
 ### TODO
 
 - pass CIK/RID on ant command line so test end example files don't have to be modified
 
 ### Release Info
+
+#### 0.3.0 (2015-9-01)
+
+- added `writegroup`, `recordbatch`, `usage`, and `wait`
+- added Provisioning capabilities and example 
 
 #### 0.2.0 (2013-11-06)
 

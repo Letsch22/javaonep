@@ -23,7 +23,7 @@ import onepv1.*;
 public class ClientOnepExamples {
 	public static void main(String[] args){
 		String cik = "PUTA40CHARACTERCIKHERE";
-		ClientOnep conn = new ClientOnep("http://m2.exosite.com/api:v1/rpc/process", 3, cik);
+		ClientOnep conn = new ClientOnep("https://m2.exosite.com/onep:v1/rpc/process", 3, cik);
 		
 		Random rand = new Random();
 		int value = rand.nextInt(100);

@@ -32,7 +32,7 @@ public class OnepUnitTest extends TestCase {
 		this.cik_ = "PUTA40CHARACTERCIKHERE";
         // NOTE: Use Onep.listing() to get a client's RIDs
 		this.rid_ = "PUTA40CHARACTERRIDHERE";
-		this.conn_ = new Onep("http://m2.exosite.com/api:v1/rpc/process", 3);
+		this.conn_ = new Onep("https://m2.exosite.com/onep:v1/rpc/process", 3);
 	}
 
 	protected void tearDown() {
